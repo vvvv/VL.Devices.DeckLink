@@ -5,10 +5,15 @@
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>VL.Devices.DeckLink</RootNamespace>
+    <OutputPath>..\..\lib\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <COMReference Include="DeckLinkAPI">
+    <Reference Include="Interop.DeckLinkAPI">
+      <HintPath>..\..\dependencies\Interop.DeckLinkAPI.dll</HintPath>
+    </Reference>
+
+    <!--<COMReference Include="DeckLinkAPI">
       <Guid>{D864517A-EDD5-466D-867D-C819F1C052BB}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
@@ -16,7 +21,7 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    </COMReference>-->
   </ItemGroup>
 
   <ItemGroup>

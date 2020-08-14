@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>VL.Devices.DeckLink</id>
+    <version>0.0.1</version>
+    <title>VL.Devices.DeckLink</title>
+    <authors>vvvv</authors>
+    <owners>vvvv</owners>
+    <projectUrl>https://github.com/vvvv/VL.Devices.DeckLink</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Blackmagic DeckLink for vvvv</summary>
+    <description>Blackmagic DeckLink for vvvv</description>
+    <tags>VL, Blackmagic, SDI, HDMI, DeckLink, camera, video</tags>
+	<license type="expression">LGPL-3.0-only</license>
+    <icon>icon\nugeticon.png</icon>
+  </metadata>
+  <files>
+    <file src="..\lib\netstandard2.0\*" target="lib\netstandard2.0\" exclude="" />
+    <file src="..\*.vl" target="" exclude="" />
+    <file src="..\help\**" target="help\" exclude="" />
+	  <file src="nugeticon.png" target="icon\" />
+  </files>
+</package>
