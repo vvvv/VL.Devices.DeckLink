@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>VL.Devices.DeckLink</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="DeckLinkAPI">
+      <Guid>{D864517A-EDD5-466D-867D-C819F1C052BB}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stride.Graphics" Version="4.0.0.1-vvvv-1273" />
+    <PackageReference Include="Stride.Rendering" Version="4.0.0.1-vvvv-1273" />
+    <PackageReference Include="Stride.Shaders.Compiler" Version="4.0.0.1-vvvv-1273" />
+    <PackageReference Include="VL.Core" Version="2020.2.0-0217-g78b13ed816" />
+  </ItemGroup>
+
+</Project>
