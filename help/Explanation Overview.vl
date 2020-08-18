@@ -15,7 +15,7 @@
       </p:NodeReference>
       <Patch Id="LoZic1cvBTEMwi6EUSNytV">
         <Canvas Id="NyTs6BD6kMRQKSKgIHDUUI" CanvasType="Group">
-          <Node Bounds="489,271,65,19" Id="NkF8H1xBvzNMAupmV8Y53R">
+          <Node Bounds="604,368,65,19" Id="NkF8H1xBvzNMAupmV8Y53R">
             <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
               <Choice Kind="ProcessNode" Name="VideoIn" />
             </p:NodeReference>
@@ -25,24 +25,22 @@
                 <Choice Kind="TypeFlag" Name="_BMDDisplayMode" />
               </p:TypeAnnotation>
             </Pin>
-            <Pin Id="DaS9rGVq191QMPMvufXhMB" Name="Preferred Pixel Format" Kind="InputPin" DefaultValue="bmdFormat8BitYUV">
+            <Pin Id="DaS9rGVq191QMPMvufXhMB" Name="Preferred Pixel Format" Kind="InputPin">
               <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
                 <Choice Kind="TypeFlag" Name="_BMDPixelFormat" />
               </p:TypeAnnotation>
             </Pin>
-            <Pin Id="JX4IQ68JOT7M9y13DQR6DG" Name="Output Texture Format" Kind="InputPin" DefaultValue="B8G8R8A8_UNorm_SRgb">
-              <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-                <Choice Kind="TypeFlag" Name="PixelFormat" />
-              </p:TypeAnnotation>
-            </Pin>
-            <Pin Id="EIXpdRL78YKLu3QYdW9R5U" Name="Conversion" Kind="InputPin" DefaultValue="BT601_SRGB">
-              <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.dll">
-                <Choice Kind="TypeFlag" Name="Colorspace" />
+            <Pin Id="Bb9eozvOoOfL8ta1Ts8KUr" Name="Convert On GPU" Kind="InputPin" DefaultValue="True">
+              <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+                <Choice Kind="TypeFlag" Name="Boolean" />
               </p:TypeAnnotation>
             </Pin>
             <Pin Id="QG3r4M6oHb8Lj9myRIlYjN" Name="Output" Kind="OutputPin" />
+            <Pin Id="AtN0vrwJEQ4MFhysawUiVh" Name="Colorspace" Kind="OutputPin" />
+            <Pin Id="SjMx5JzLbafNGszkf5aT9y" Name="Discarded Frames" Kind="OutputPin" />
+            <Pin Id="OFeP6yzoDjOLpIE3VSVCSl" Name="Supported Display Modes" Kind="OutputPin" />
           </Node>
-          <Pad Id="StL4zYxw6x5Pfp6k5S45Gq" Comment="Device" Bounds="303,213,150,15" ShowValueBox="true" isIOBox="true" Value="DeckLink Mini Recorder 4K">
+          <Pad Id="StL4zYxw6x5Pfp6k5S45Gq" Comment="Device" Bounds="603,274,150,15" ShowValueBox="true" isIOBox="true" Value="DeckLink Mini Recorder 4K">
             <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
               <Choice Kind="TypeFlag" Name="DeviceEnumEntry" />
             </p:TypeAnnotation>
@@ -52,7 +50,7 @@
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="ProcessAppFlag" Name="RenderWindow" />
             </p:NodeReference>
-            <Pin Id="RJzVrwb1GUTLLGXuucm0xE" Name="Bounds" Kind="InputPin" DefaultValue="1151, 164, 662, 698">
+            <Pin Id="RJzVrwb1GUTLLGXuucm0xE" Name="Bounds" Kind="InputPin" DefaultValue="1162, 205, 662, 698">
               <p:TypeAnnotation LastCategoryFullName="2D" LastSymbolSource="CoreLibBasics.vl">
                 <Choice Kind="TypeFlag" Name="Rectangle" />
               </p:TypeAnnotation>
@@ -82,7 +80,7 @@
             <Pin Id="ILgRnhtflPgQXA2OtvLge4" Name="Texture" Kind="InputPin" />
             <Pin Id="CKfhMR8yj2cPk9mAN3uJkm" Name="Color" Kind="InputPin" />
             <Pin Id="Ln9SSEfKzP0NKT6mVEiUhr" Name="Screen Space" Kind="InputPin" />
-            <Pin Id="IY6MQebETZdOFwoDBnfxdE" Name="Keep Aspect" Kind="InputPin" DefaultValue="True">
+            <Pin Id="IY6MQebETZdOFwoDBnfxdE" Name="Keep Aspect" Kind="InputPin">
               <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
                 <Choice Kind="TypeFlag" Name="Boolean" />
               </p:TypeAnnotation>
@@ -103,7 +101,7 @@
               </CategoryReference>
             </p:NodeReference>
             <Pin Id="L0FCysObiHIMZKo3RA0UIw" Name="Input" Kind="InputPin" />
-            <Pin Id="Di1owMUTXPbPt5BbudXIBS" Name="Clear Color" Kind="InputPin" DefaultValue="0.3099999, 0.3099999, 0.3099999, 1">
+            <Pin Id="Di1owMUTXPbPt5BbudXIBS" Name="Clear Color" Kind="InputPin">
               <p:TypeAnnotation LastCategoryFullName="Color" LastSymbolSource="CoreLibBasics.vl">
                 <Choice Kind="TypeFlag" Name="RGBA" />
               </p:TypeAnnotation>
@@ -112,7 +110,7 @@
             <Pin Id="DjIqzDa7qKMLpY11HjBjLi" Name="Clear Depth" Kind="InputPin" />
             <Pin Id="L0H2kygeXEnP3HknavEqFz" Name="Output" Kind="StateOutputPin" />
           </Node>
-          <Node Bounds="472,412,25,19" Id="JrIN6a5t3vlMAR53Ew2TKA">
+          <Node Bounds="480,426,25,19" Id="JrIN6a5t3vlMAR53Ew2TKA">
             <p:NodeReference LastCategoryFullName="2D.Transform" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="OperationCallFlag" Name="UniformScale" />
@@ -128,74 +126,12 @@
             </Pin>
             <Pin Id="Ick9TAKZ1JsMt7yZ6KJuYW" Name="Output" Kind="OutputPin" />
           </Node>
-          <Pad Id="LF4Il2SoIsmN4vrvnT2Qy5" Comment="Clear Color" Bounds="933,192,289,130" ShowValueBox="true" isIOBox="true" Value="1, 1, 1, 1">
-            <p:TypeAnnotation LastCategoryFullName="Color" LastSymbolSource="CoreLibBasics.vl">
-              <Choice Kind="TypeFlag" Name="RGBA" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="OhKa9Vw99rwMxDUI3ei00y" Comment="Back Buffer Format" Bounds="698,545,172,15" ShowValueBox="true" isIOBox="true" Value="R8G8B8A8_UNorm_SRgb">
-            <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-              <Choice Kind="TypeFlag" Name="PixelFormat" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="MR2jap0iZHfPufjAaXXKsG" Comment="Back Buffer Format" Bounds="780,580,172,15" ShowValueBox="true" isIOBox="true" Value="B8G8R8A8_UNorm">
-            <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-              <Choice Kind="TypeFlag" Name="PixelFormat" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="NtcjjcWtFKJMawhWOdaE4q" Comment="Output Texture Format" Bounds="709,371,172,15" ShowValueBox="true" isIOBox="true" Value="B8G8R8A8_UNorm_SRgb">
-            <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-              <Choice Kind="TypeFlag" Name="PixelFormat" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="VdFhALItabWQNfxduwR4a3" Comment="Output Texture Format" Bounds="739,401,172,15" ShowValueBox="true" isIOBox="true" Value="B8G8R8A8_UNorm">
-            <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-              <Choice Kind="TypeFlag" Name="PixelFormat" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="Qbt378OybHgQElHVC92dsd" Comment="Output Texture Format" Bounds="694,430,172,15" ShowValueBox="true" isIOBox="true" Value="R16G16B16A16_Float">
-            <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-              <Choice Kind="TypeFlag" Name="PixelFormat" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="Tonr6gdrxMrP7a5vGtDuB7" Bounds="548,162,35,35" ShowValueBox="true" isIOBox="true" Value="True">
+          <Pad Id="IKXZe4VZYebMLtGs4DbXwa" Comment="Convert On GPU" Bounds="666,319,35,35" ShowValueBox="true" isIOBox="true" Value="True">
             <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="TypeFlag" Name="Boolean" />
             </p:TypeAnnotation>
           </Pad>
-          <Node Bounds="632,215" Id="C07DNsuGkDULDdgXdX7zSa">
-            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="OperationCallFlag" Name="Switch" />
-              <CategoryReference Kind="Category" Name="Control" NeedsToBeDirectParent="true" />
-            </p:NodeReference>
-            <Pin Id="MxG6XPJvDZvQLIUUuJM2pa" Name="Index" Kind="InputPin" />
-            <Pin Id="AsMe1LUOyPsLMITG0gx6ve" Name="Input" Kind="InputPin" />
-            <Pin Id="JL2DzkOtrSAOtz5MqwixJZ" Name="Input 2" Kind="InputPin" />
-            <Pin Id="IfCoWMXMLlVOZU3yFCOrEn" Name="Output" Kind="OutputPin" />
-          </Node>
-          <Pad Id="R7IwA3w1MGmMQ2lAc4OjWR" Comment="" Bounds="659,160,85,15" ShowValueBox="true" isIOBox="true" Value="BT601">
-            <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.dll">
-              <Choice Kind="TypeFlag" Name="Colorspace" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Pad Id="MSWxheHd2kyPx0PvpECuII" Comment="" Bounds="624,131,85,15" ShowValueBox="true" isIOBox="true" Value="BT601_SRGB">
-            <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.dll">
-              <Choice Kind="TypeFlag" Name="Colorspace" />
-            </p:TypeAnnotation>
-          </Pad>
-          <Node Bounds="716,605,45,19" Id="KuhOaOvKfWXOkjhtfeY2Ii">
-            <p:NodeReference LastCategoryFullName="Control" LastSymbolSource="CoreLibBasics.vl">
-              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-              <Choice Kind="OperationCallFlag" Name="Switch" />
-              <CategoryReference Kind="Category" Name="Control" NeedsToBeDirectParent="true" />
-            </p:NodeReference>
-            <Pin Id="DU4zBvuE4DSNcBVe0qEcfG" Name="Index" Kind="InputPin" />
-            <Pin Id="NsHwQ6tfWFiNhJLjiQEnpB" Name="Input" Kind="InputPin" />
-            <Pin Id="RWfeQlZd2BqLCkMFrP8GQQ" Name="Input 2" Kind="InputPin" />
-            <Pin Id="AmQehU9WexRL0x74Lv7AYn" Name="Output" Kind="OutputPin" />
-          </Node>
-          <Pad Id="L2OBfmuxooaNWn7WCDBl3V" Bounds="426,88,200,19" ShowValueBox="true" isIOBox="true" Value="SRGB weirdness going on still ...">
+          <Pad Id="E1edCvEo5Z6QBwrAIjWRAH" Bounds="674,357,141,19" ShowValueBox="true" isIOBox="true" Value="Assumes YUV422 8Bit">
             <p:TypeAnnotation>
               <Choice Kind="TypeFlag" Name="String" />
             </p:TypeAnnotation>
@@ -207,11 +143,6 @@
         </Canvas>
         <Patch Id="C1i9wtJ5VR1MohC3kb9rAj" Name="Create" />
         <Patch Id="OkacbrZcMxpMXXOQ2CvYzu" Name="Update" />
-        <!--
-
-    ************************  ************************
-
--->
         <ProcessDefinition Id="RauHhFWxya6Ot7MNhGriLD">
           <Fragment Id="NCEY4msVTjvMPiHzF02XMq" Patch="C1i9wtJ5VR1MohC3kb9rAj" Enabled="true" />
           <Fragment Id="E6kvV1cSyAwQc5MaydllYw" Patch="OkacbrZcMxpMXXOQ2CvYzu" Enabled="true" />
@@ -219,19 +150,9 @@
         <Link Id="BV8y90gSCtsNZNAEBXqlYz" Ids="StL4zYxw6x5Pfp6k5S45Gq,TcSxOORfBpFOxlwNsAcSLb" />
         <Link Id="JdFANTWmLMmPnoxFVmnPtx" Ids="L0H2kygeXEnP3HknavEqFz,SBGogLLdyMsPfGoAzTXXi6" />
         <Link Id="LBrkVsc1DzGOJbEJACHdCa" Ids="Ick9TAKZ1JsMt7yZ6KJuYW,I7qa2Bl7FqwODhADOjZ8G6" />
-        <Link Id="O6aOh4CRqX4Pm9TxajcLMU" Ids="LF4Il2SoIsmN4vrvnT2Qy5,Di1owMUTXPbPt5BbudXIBS" />
-        <Link Id="RmV7tgdDXOVNYKJ4esewNV" Ids="LF4Il2SoIsmN4vrvnT2Qy5,CKfhMR8yj2cPk9mAN3uJkm" />
         <Link Id="OrJfXdW1IsrLRUsJH9Qx7x" Ids="LLXIteNphwbPU8LeULo4HM,L0FCysObiHIMZKo3RA0UIw" />
         <Link Id="Fn1Vcsiy7HZNdiN8nqFcAK" Ids="QG3r4M6oHb8Lj9myRIlYjN,ILgRnhtflPgQXA2OtvLge4" />
-        <Link Id="CVNgq3KHbTyQAJItTLcn5c" Ids="NtcjjcWtFKJMawhWOdaE4q,JX4IQ68JOT7M9y13DQR6DG" />
-        <Link Id="HZLczhJvYZbPYUpE6ZcwFu" Ids="IfCoWMXMLlVOZU3yFCOrEn,EIXpdRL78YKLu3QYdW9R5U" />
-        <Link Id="QzE8Q3WmPwePBsvaY7jo4h" Ids="OhKa9Vw99rwMxDUI3ei00y,NsHwQ6tfWFiNhJLjiQEnpB" />
-        <Link Id="CsCjmCpmvJ4NUDAGeciCyU" Ids="MR2jap0iZHfPufjAaXXKsG,RWfeQlZd2BqLCkMFrP8GQQ" />
-        <Link Id="MpFQ7XB4qeqN5LFky6GQ6g" Ids="AmQehU9WexRL0x74Lv7AYn,LyQifVYEcaLN9E7Otd8Xdp" />
-        <Link Id="SmnnB5xfCSmQUYlxABQQq2" Ids="Tonr6gdrxMrP7a5vGtDuB7,DU4zBvuE4DSNcBVe0qEcfG" />
-        <Link Id="SzYpSyUXEQQQD86keNwihW" Ids="Tonr6gdrxMrP7a5vGtDuB7,MxG6XPJvDZvQLIUUuJM2pa" />
-        <Link Id="LpQwQLoPidNOLf1bVakgEj" Ids="MSWxheHd2kyPx0PvpECuII,AsMe1LUOyPsLMITG0gx6ve" />
-        <Link Id="U2nE44duEgfN8QGeuzHzho" Ids="R7IwA3w1MGmMQ2lAc4OjWR,JL2DzkOtrSAOtz5MqwixJZ" />
+        <Link Id="VZGO6XLy14kNc5ITfSedpt" Ids="IKXZe4VZYebMLtGs4DbXwa,Bb9eozvOoOfL8ta1Ts8KUr" />
       </Patch>
     </Node>
   </Patch>

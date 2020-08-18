@@ -22,12 +22,14 @@ namespace VL.Devices.DeckLink
     {
         BT601,
         BT709,
-        BT601_SRGB
+        BT2020
     }
 
     public class VideoCaptureRenderer : RendererBase, IDeckLinkInputCallback
     {
         readonly SerialDisposable deviceSubscription = new SerialDisposable();
+        CDeckLinkVideoConversion converter;
+        int discardedFrames;
 
         public DeviceEnumEntry Device
         {
@@ -71,6 +73,7 @@ namespace VL.Devices.DeckLink
                 if (value != inputDevice)
                 {
                     inputDevice = value;
+                    UpdateSupportedDisplayFormats(value);
                     Resubscribe();
                 }
             }
@@ -108,6 +111,8 @@ namespace VL.Devices.DeckLink
         }
         _BMDPixelFormat preferredPixelFormat = _BMDPixelFormat.bmdFormat8BitYUV;
 
+        public bool ConvertOnGpu { get; set; }
+
         public bool ApplyDetectedDisplayMode
         {
             get => applyDetectedDisplayMode;
@@ -139,7 +144,7 @@ namespace VL.Devices.DeckLink
         public Colorspace Colorspace
         {
             get => conversion;
-            set
+            private set
             {
                 if (value != conversion)
                 {
@@ -154,16 +159,44 @@ namespace VL.Devices.DeckLink
 
         public bool IsStreaming => currentDisplayMode != _BMDDisplayMode.bmdModeUnknown;
 
-        void Resubscribe()
+        public string SupportedDisplayModes { get; private set; }
+
+        public int DiscardedFrames => discardedFrames;
+
+        void UpdateSupportedDisplayFormats(IDeckLinkInput inputDevice)
+        {
+            var sb = new StringBuilder();
+            if (inputDevice != null)
+            {
+                inputDevice.GetDisplayModeIterator(out var iterator);
+                while (true)
+                {
+                    iterator.Next(out var deckLinkDisplayMode);
+                    if (deckLinkDisplayMode is null)
+                        break;
+
+                    sb.AppendLine(deckLinkDisplayMode.GetDisplayMode().ToString());
+                }
+            }
+            SupportedDisplayModes = sb.ToString();
+        }
+
+        void Resubscribe() => Resubscribe(preferredDisplayMode);
+
+        void Resubscribe(_BMDDisplayMode requestedDisplayMode)
         {
             deviceSubscription.Disposable = null;
-            deviceSubscription.Disposable = Subscribe(inputDevice, preferredDisplayMode, preferredPixelFormat);
+            deviceSubscription.Disposable = Subscribe(inputDevice, requestedDisplayMode, preferredPixelFormat);
         }
 
         IDisposable Subscribe(IDeckLinkInput inputDevice, _BMDDisplayMode requestedDisplayMode, _BMDPixelFormat requestedPixelFormat)
         {
             if (inputDevice is null)
                 return Disposable.Empty;
+
+            // Capture the current synchronization context. 
+            // We need it to post certain events back on the main thread as our thread apartment state is most probably STA and not MTA.
+            synchronizationContext = SynchronizationContext.Current;
 
             try
             {
@@ -185,6 +218,31 @@ namespace VL.Devices.DeckLink
                     requestedPixelFormat,
                     applyDetectedDisplayMode ? _BMDVideoInputFlags.bmdVideoInputEnableFormatDetection : _BMDVideoInputFlags.bmdVideoInputFlagDefault);
 
+                // Read the used colorspace
+                inputDevice.GetDisplayMode(requestedDisplayMode, out var displayMode);
+                var displayModeFlags = displayMode.GetFlags();
+                if (displayModeFlags.HasFlag(_BMDDisplayModeFlags.bmdDisplayModeColorspaceRec601))
+                    Colorspace = Colorspace.BT601;
+                else if (displayModeFlags.HasFlag(_BMDDisplayModeFlags.bmdDisplayModeColorspaceRec709))
+                    Colorspace = Colorspace.BT709;
+                else if (displayModeFlags.HasFlag(_BMDDisplayModeFlags.bmdDisplayModeColorspaceRec2020))
+                    Colorspace = Colorspace.BT2020;
+
+                // Allocate video frame for conversion
+                var outputDevice = inputDevice as IDeckLinkOutput;
+                if (outputDevice != null)
+                {
+                    outputDevice.CreateVideoFrame(
+                        displayMode.GetWidth(),
+                        displayMode.GetHeight(),
+                        displayMode.GetWidth() * 4,
+                        _BMDPixelFormat.bmdFormat8BitBGRA,
+                        _BMDFrameFlags.bmdFrameFlagDefault, out var mutableConvertedFrame);
+                    convertedFrame = mutableConvertedFrame;
+                }
+                if (convertedFrame is null)
+                    convertedFrame = new BGRAVideoOutputFrame(displayMode.GetWidth(), displayMode.GetHeight());
+
                 inputDevice.SetCallback(this);
 
                 inputDevice.StartStreams();
@@ -199,6 +257,10 @@ namespace VL.Devices.DeckLink
                     inputDevice.FlushStreams();
                     inputDevice.DisableVideoInput();
                     inputDevice.SetCallback(null);
+                    if (convertedFrame is IDisposable disposable)
+                        disposable.Dispose();
+                    convertedFrame = null;
+                    converter = null;
                 });
             }
             catch (Exception)
@@ -209,6 +271,8 @@ namespace VL.Devices.DeckLink
         }
         _BMDDisplayMode currentDisplayMode = _BMDDisplayMode.bmdModeUnknown;
         _BMDPixelFormat currentPixelFormat = _BMDPixelFormat.bmdFormatUnspecified;
+        IDeckLinkVideoFrame convertedFrame;
+        SynchronizationContext synchronizationContext;
 
         void IDeckLinkInputCallback.VideoInputFormatChanged(_BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode newDisplayMode, _BMDDetectedVideoInputFormatFlags detectedSignalFlags)
         {
@@ -217,23 +281,20 @@ namespace VL.Devices.DeckLink
                 return;
 
             // Resubscribe with new display mode
-            deviceSubscription.Disposable = null;
-            Subscribe(inputDevice, newDisplayMode.GetDisplayMode(), preferredPixelFormat);
+            var displayMode = newDisplayMode.GetDisplayMode();
+            if (synchronizationContext != null)
+            {
+                synchronizationContext.Post(_ => Resubscribe(displayMode), default);
+            }
+            else
+            {
+                Resubscribe(displayMode);
+            }
         }
 
         private readonly RingBuffer<Texture> ringBuffer = new RingBuffer<Texture>(2);
         private readonly object ringBufferLock = new object();
         private readonly ManualResetEventSlim videoFrameArrived = new ManualResetEventSlim();
-
-        //CDeckLinkVideoConversion c = new CDeckLinkVideoConversion();
-        //IDeckLinkMutableVideoFrame convertedFrame;
-        //if (this.convertedFrame != null)
-        //{
-        //    Marshal.ReleaseComObject(this.convertedFrame);
-        //}
-        //var device = inputDevice as IDeckLinkOutput;
-        //device?.CreateVideoFrame(width, height, width * 4, _BMDPixelFormat.bmdFormat8BitBGRA, _BMDFrameFlags.bmdFrameFlagDefault, out this.convertedFrame);
-        //c.ConvertFrame(videoFrame, convertedFrame);
 
         unsafe void IDeckLinkInputCallback.VideoInputFrameArrived(IDeckLinkVideoInputFrame videoFrame, IDeckLinkAudioInputPacket audioPacket)
         {
@@ -246,23 +307,25 @@ namespace VL.Devices.DeckLink
             var width = videoFrame.GetWidth();
             var height = videoFrame.GetHeight();
 
-            if (needsConversion)
-                width = width / 2;
-
-            videoFrame.GetBytes(out var ptr);
-            var data = new DataBox(ptr, videoFrame.GetRowBytes(), videoFrame.GetRowBytes() * height);
-
-            var x = new Span<ColorBGRA>(ptr.ToPointer(), videoFrame.GetRowBytes() * height / sizeof(ColorBGRA));
-
-            var renderContext = RenderContext.GetShared(Services);
-            var texture = Texture.New2D(
-                renderContext.GraphicsDevice,
-                width,
-                height,
-                mipCount: 1,
-                format: PixelFormat.B8G8R8A8_UNorm /*videoFrame.GetPixelFormat().ToPixelFormat()*/,
-                textureData: new[] { data },
-                usage: GraphicsResourceUsage.Immutable);
+            Texture texture;
+            if (currentPixelFormat == _BMDPixelFormat.bmdFormat8BitBGRA)
+            {
+                // The frame is gamma corrected - mark texture as such (sRGB)
+                texture = ToTexture(Services, videoFrame, width, height, PixelFormat.B8G8R8A8_UNorm_SRgb);
+            }
+            if (doConvertOnGpu && currentPixelFormat == _BMDPixelFormat.bmdFormat8BitYUV)
+            {
+                texture = ToTexture(Services, videoFrame, width / 2, height, PixelFormat.B8G8R8A8_UNorm);
+            }
+            else
+            {
+                // Must be created on camera thread
+                if (converter is null)
+                    converter = new CDeckLinkVideoConversion();
+                converter.ConvertFrame(videoFrame, convertedFrame);
+                // The converted frame is gamma corrected, mark texture as such (sRGB)
+                texture = ToTexture(Services, convertedFrame, width, height, PixelFormat.B8G8R8A8_UNorm_SRgb);
+            }
 
             Marshal.ReleaseComObject(videoFrame);
 
@@ -271,6 +334,7 @@ namespace VL.Devices.DeckLink
                 // In case the buffer is full the element at the front will be popped.
                 if (ringBuffer.IsFull)
                 {
+                    Interlocked.Increment(ref discardedFrames);
                     ringBuffer.Front().Dispose();
                 }
 
@@ -282,6 +346,21 @@ namespace VL.Devices.DeckLink
             videoFrameArrived.Set();
         }
 
+        Texture ToTexture(IServiceRegistry services, IDeckLinkVideoFrame frame, int width, int height, PixelFormat pixelFormat)
+        {
+            frame.GetBytes(out var ptr);
+            var data = new DataBox(ptr, frame.GetRowBytes(), frame.GetRowBytes() * height);
+            var renderContext = RenderContext.GetShared(services);
+            return Texture.New2D(
+                renderContext.GraphicsDevice,
+                width,
+                height,
+                mipCount: 1,
+                format: pixelFormat,
+                textureData: new[] { data },
+                usage: GraphicsResourceUsage.Immutable);
+        }
+
         public Texture Update()
         {
             // Check if deck link device is available and we're streaming
@@ -291,18 +370,18 @@ namespace VL.Devices.DeckLink
             // Fetch the texture
             FetchCurrentVideoFrame();
 
-            if (currentPixelFormat == _BMDPixelFormat.bmdFormat8BitYUV)
+            if (ConvertOnGpu && currentPixelFormat == _BMDPixelFormat.bmdFormat8BitYUV)
             {
-                needsConversion = true;
+                doConvertOnGpu = true;
                 return current.outputTexture;
             }
             else
             {
-                needsConversion = false;
+                doConvertOnGpu = false;
                 return currentVideoFrame;
             }
         }
-        private bool needsConversion;
+        private bool doConvertOnGpu;
 
         void FetchCurrentVideoFrame()
         {
@@ -346,15 +425,13 @@ namespace VL.Devices.DeckLink
             }
         }
 
-        public PixelFormat OutputTextureFormat { get; set; } = PixelFormat.B8G8R8A8_UNorm_SRgb;
-
         protected override void DrawCore(RenderDrawContext context)
         {
-            if (CurrentVideoFrame is null || !needsConversion)
+            if (CurrentVideoFrame is null || !doConvertOnGpu)
                 return;
 
             // Prepare render target
-            if (CurrentVideoFrame.Description != current.inputDesc || current.outputTexture.Format != OutputTextureFormat)
+            if (CurrentVideoFrame.Description != current.inputDesc)
             {
                 current.outputTexture?.Dispose();
                 current.inputDesc = CurrentVideoFrame.Description;
@@ -365,7 +442,7 @@ namespace VL.Devices.DeckLink
 
                 // YUV is compressed
                 outputDesc.Width *= 2;
-                outputDesc.Format = OutputTextureFormat;
+                outputDesc.Format = PixelFormat.B8G8R8A8_UNorm_SRgb;
 
                 current.outputTexture = Texture.New(context.GraphicsDevice, outputDesc);
             }
@@ -409,13 +486,15 @@ namespace VL.Devices.DeckLink
 
             string GetShaderSource()
             {
+                // https://docs.microsoft.com/en-us/windows/win32/medfound/recommended-8-bit-yuv-formats-for-video-rendering#converting-8-bit-yuv-to-rgb888
+                // https://support.medialooks.com/hc/en-us/articles/360030737152-Color-correction-with-matrix-transformation
+                // https://forum.blackmagicdesign.com/viewtopic.php?f=12&t=29413 
+
                 string s = default;
                 switch (conversion)
                 {
                     case Colorspace.BT601:
                         s = @"
-// vvvv
-// https://docs.microsoft.com/en-us/windows/win32/medfound/recommended-8-bit-yuv-formats-for-video-rendering#converting-8-bit-yuv-to-rgb888
 	    float4 col;
 	    col.r = 1.164383 * c + 1.596027 * e;
 	    col.g = 1.164383 * c - (0.391762 * d) - (0.812968 * e);
@@ -425,7 +504,6 @@ namespace VL.Devices.DeckLink
                         break;
                     case Colorspace.BT709:
                         s = @"
-// https://forum.blackmagicdesign.com/viewtopic.php?f=12&t=29413 
 	    float4 col;
 	    col.r = 1.164383 * c + 1.792741 * e;
 	    col.g = 1.164383 * c - (0.213249 * d) - (0.532909 * e);
@@ -433,14 +511,12 @@ namespace VL.Devices.DeckLink
 	    col.a = 1.0f;
 ";
                         break;
-                    case Colorspace.BT601_SRGB:
+                    case Colorspace.BT2020:
                         s = @"
-// vvvv
-// https://docs.microsoft.com/en-us/windows/win32/medfound/recommended-8-bit-yuv-formats-for-video-rendering#converting-8-bit-yuv-to-rgb888
 	    float4 col;
-	    col.r = pow(1.164383 * c + 1.596027 * e, 2.2);
-	    col.g = pow(1.164383 * c - (0.391762 * d) - (0.812968 * e), 2.2);
-	    col.b = pow(1.164383 * c +  2.017232 * d, 2.2);
+	    col.r = 1.164383 * c + 1.717000 * e;
+	    col.g = 1.164383 * c - (0.191603 * d) - (0.665274 * e);
+	    col.b = 1.164383 * c +  2.190671 * d;
 	    col.a = 1.0f;
 ";
                         break;
@@ -469,7 +545,17 @@ shader YUV2RGB : ImageEffectShader
 	
 " + s + @"
 	
-        return col;
+        // The render pipeline expects a linear color space
+        return float4(ToLinear(col.r), ToLinear(col.g), ToLinear(col.b), col.a);
+    }
+
+    // There're faster approximations, see http://chilliant.blogspot.com/2012/08/srgb-approximations-for-hlsl.html
+    float ToLinear(float C_srgb)
+    {
+        if (C_srgb <= 0.04045)
+            return C_srgb / 12.92;
+        else
+            return pow((C_srgb + 0.055) / 1.055, 2.4);
     }
 };
 ";

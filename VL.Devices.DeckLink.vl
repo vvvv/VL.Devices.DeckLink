@@ -15,7 +15,7 @@
         </p:NodeReference>
         <Patch Id="RBXLfzjLwshNpBZgxdgndU">
           <Canvas Id="O42wd2lHD8UPzrCS71aLZF" CanvasType="Group">
-            <Node Bounds="448,201,97,26" Id="JsT7j1YkqKsLpoikwFcdk8">
+            <Node Bounds="443,158,97,26" Id="JsT7j1YkqKsLpoikwFcdk8">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
@@ -85,35 +85,83 @@
               <Pin Id="K1Wf7K3ExFDLUaRHHYUyof" Name="Output" Kind="StateOutputPin" />
               <Pin Id="I883anM7QEKLMjQ595WgPQ" Name="Result" Kind="OutputPin" />
             </Node>
-            <Node Bounds="1185,387,129,26" Id="NEXDBYieJE3O34kYB37ROv">
-              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
-                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
-                <Choice Kind="OperationCallFlag" Name="SetOutputTextureFormat" />
-              </p:NodeReference>
-              <Pin Id="BVQyazbEWA4OgOCXU33syF" Name="Input" Kind="StateInputPin" />
-              <Pin Id="S0LQTKScusuPtxEp92DW5x" Name="Value" Kind="InputPin" />
-              <Pin Id="PbAORpSROmfLcPHBlwlFqn" Name="Output" Kind="StateOutputPin" />
-            </Node>
-            <ControlPoint Id="MkZ16NA6K39LraH2KDegHi" Bounds="1310,313" />
             <Node Bounds="388,384,97,26" Id="Ew1mge3rT4aNjooUUGisWH">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
-                <Choice Kind="OperationCallFlag" Name="SetColorspace" />
+                <Choice Kind="OperationCallFlag" Name="SetConvertOnGpu" />
               </p:NodeReference>
               <Pin Id="RYfK7bSay07PDBN7NME3tf" Name="Input" Kind="StateInputPin" />
               <Pin Id="H4OdgX9rMpPNlWRHICqYJX" Name="Value" Kind="InputPin" />
               <Pin Id="Jm4v7FMCoN0LRBVZK1i6AO" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="Cdux6xbRuOePqodUuXrcMD" Bounds="514,343" />
+            <ControlPoint Id="Cdux6xbRuOePqodUuXrcMD" Bounds="485,344" />
+            <Node Bounds="860,462" Id="P4ExpCEoQz1QYLDStd0gFF">
+              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
+                <Choice Kind="OperationCallFlag" Name="SupportedDisplayModes" />
+              </p:NodeReference>
+              <Pin Id="VjiFXUn5V8JMo5p4xTXVLD" Name="Input" Kind="StateInputPin" />
+              <Pin Id="Tjll7iLdqDXLhAIHDdWpfp" Name="Output" Kind="StateOutputPin" />
+              <Pin Id="MmRBswLudU2OGM1kzTZWxY" Name="Supported Display Modes" Kind="OutputPin" />
+            </Node>
+            <ControlPoint Id="SG0iI56b002PXgq39KgpOc" Bounds="984,547" />
+            <Node Bounds="820,580" Id="Sq8J23NO1QWOGFokSLTznZ">
+              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
+                <Choice Kind="OperationCallFlag" Name="DiscardedFrames" />
+              </p:NodeReference>
+              <Pin Id="KC1BSyaF6lzNNeUN3NxF8a" Name="Input" Kind="StateInputPin" />
+              <Pin Id="BsWqV45bCiNPH1JXHmzUtD" Name="Output" Kind="StateOutputPin" />
+              <Pin Id="GQlHW9c0xYwQJW8hxXOQ7q" Name="Discarded Frames" Kind="OutputPin" />
+            </Node>
+            <ControlPoint Id="I5547tbd4ztQCFmONa3iHT" Bounds="914,640" />
+            <Node Bounds="719,656" Id="S2Stmd2L3IMMe1wzFblPtT">
+              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
+                <Choice Kind="OperationCallFlag" Name="Colorspace" />
+              </p:NodeReference>
+              <Pin Id="PkWCLf5h0MoQbkZmQ1LA9I" Name="Input" Kind="StateInputPin" />
+              <Pin Id="UAfqgZmEGhXNyyOvU14f2E" Name="Output" Kind="StateOutputPin" />
+              <Pin Id="GUbw1T4BRboLfIiFrnaKl6" Name="Colorspace" Kind="OutputPin" />
+            </Node>
+            <ControlPoint Id="G0TpxZrqkbyLRZyL7rG0cs" Bounds="810,747" />
+            <Node Bounds="444,218,154,26" Id="JwBdO7namnAM9De7GZHF3y">
+              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
+                <Choice Kind="OperationCallFlag" Name="SetApplyDetectedDisplayMode" />
+              </p:NodeReference>
+              <Pin Id="Ep1pOrPLB6COYyUzledDLC" Name="Input" Kind="StateInputPin" />
+              <Pin Id="EkLXIiIOR8uNtzeisxHfOk" Name="Value" Kind="InputPin" DefaultValue="True">
+                <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
+                  <Choice Kind="TypeFlag" Name="Boolean" />
+                </p:TypeAnnotation>
+              </Pin>
+              <Pin Id="CQhvajLbYB5PyfXwbwjBh9" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <Pad Id="AN27AxLnREtN37BNqze33c" Bounds="455,201,262,19" ShowValueBox="true" isIOBox="true" Value="Auto adjust to display mode set on camera">
+              <p:TypeAnnotation>
+                <Choice Kind="TypeFlag" Name="String" />
+              </p:TypeAnnotation>
+              <p:ValueBoxSettings>
+                <p:fontsize p:Type="Int32">9</p:fontsize>
+                <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+              </p:ValueBoxSettings>
+            </Pad>
           </Canvas>
           <Patch Id="VEmoPsqo25CObgUprdfF7R" Name="Create" ParticipatingElements="JsT7j1YkqKsLpoikwFcdk8" />
           <Patch Id="UGQYisLKNoJOgfAIMGnLMV" Name="Update">
             <Pin Id="AhGCSUArxcNOJNQXaX4wqQ" Name="Output" Kind="OutputPin" Bounds="697,512" />
-            <Pin Id="AZt6a4UzXcDLVrvV9hL1TK" Name="Conversion" Kind="InputPin" Bounds="515,342" />
+            <Pin Id="AZt6a4UzXcDLVrvV9hL1TK" Name="Convert On GPU" Kind="InputPin" Bounds="515,342" />
+            <Pin Id="Em18FL7b0gEOTE38fcSFQo" Name="Supported Display Modes" Kind="OutputPin" Bounds="986,548" />
+            <Pin Id="FLD4SNDwBDANSoerFZQMiX" Name="Discarded Frames" Kind="OutputPin" Bounds="918,654" />
+            <Pin Id="Apm7y9CHVCuMpwNTUR5Ezo" Name="Colorspace" Kind="OutputPin" Bounds="810,747" />
           </Patch>
           <Slot Id="IpdbLEAKMwALDAkxorlC0Y" Name="Instance" />
-          <Link Id="Bd25fUkw0lCNvcxUoLlLij" Ids="FxcvNJy5uKsP2aduZA53BP,SRcRMzApZMiOv20HGu0etK" />
           <Patch Id="PAGUpajLF3LNnACHfpGCt8" Name="Dispose" ParticipatingElements="OitcLggWChtOnRUQbXIMfB" />
           <Link Id="ONtuGa8yYi6LEcyKXTpzYP" Ids="PGknvAVLifDP1BJVbpwPJm,FXUlCqYDxmhOLF2MIZW1pD" />
           <Link Id="LOJrBJvkmA4MdaLpYU9X4k" Ids="SRcRMzApZMiOv20HGu0etK,ChrtaknqhI4PCWIFPtPEif" />
@@ -138,7 +186,7 @@
           <Link Id="LzVqngo27wxLs8Jxgi3b3B" Ids="GKuMo71rBPDO24PqzoJL2d,KjcwT5Rmy5vQNXOBsHc2Sl" />
           <Link Id="EPNdMAgbNzVPeQoyZ8V0U3" Ids="TbWto1XF1mYORhM0JMGiQ5,GKuMo71rBPDO24PqzoJL2d" IsHidden="true" />
           <Patch Id="PrszFUrwVvgO1RA1eYsm0a" Name="SetPreferredPixelFormat">
-            <Pin Id="TbWto1XF1mYORhM0JMGiQ5" Name="Preferred Pixel Format" Kind="InputPin" DefaultValue="bmdFormat8BitBGRA">
+            <Pin Id="TbWto1XF1mYORhM0JMGiQ5" Name="Preferred Pixel Format" Kind="InputPin" DefaultValue="bmdFormat8BitYUV">
               <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
                 <Choice Kind="TypeFlag" Name="_BMDPixelFormat" />
               </p:TypeAnnotation>
@@ -146,27 +194,27 @@
           </Patch>
           <Link Id="MPfHZzhfdilPKSlDhf0NOX" Ids="SRcRMzApZMiOv20HGu0etK,N6eJFPdTQQPLHUp1tajV1P" />
           <Link Id="B027ouf68KTMoc9DE4qLqN" Ids="I883anM7QEKLMjQ595WgPQ,QhKWURwUEk8OfUdFM4Xw7A" />
-          <Link Id="ALveMTytF5SOHZ1wS4JwQi" Ids="SRcRMzApZMiOv20HGu0etK,BVQyazbEWA4OgOCXU33syF" />
-          <Patch Id="P57N3gR3JOjMNRIIyf69vn" Name="SetOutputTextureFormat" ParticipatingElements="NEXDBYieJE3O34kYB37ROv">
-            <Pin Id="Uhft3PHQUXcMxkSSY3H7UX" Name="Output Texture Format" Kind="InputPin" Bounds="1310,310" DefaultValue="B8G8R8A8_UNorm_SRgb">
-              <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
-                <Choice Kind="TypeFlag" Name="PixelFormat" />
-              </p:TypeAnnotation>
-            </Pin>
-          </Patch>
-          <Link Id="Mdz5a8FDl97LFzxpAkAkkX" Ids="MkZ16NA6K39LraH2KDegHi,S0LQTKScusuPtxEp92DW5x" />
-          <Link Id="UJwl6KOpZGTOfv2HsxFYeJ" Ids="Uhft3PHQUXcMxkSSY3H7UX,MkZ16NA6K39LraH2KDegHi" IsHidden="true" />
           <ProcessDefinition Id="SaPgN4wuS6gLJh4RGZvcgL">
             <Fragment Id="DTybdrc1E4yMxf0xGzEZq8" Patch="VEmoPsqo25CObgUprdfF7R" Enabled="true" />
             <Fragment Id="GSnw9YZkyoiOLVDNxNH3zN" Patch="DAPHA1LbeEfNAHkLyZBARM" Enabled="true" />
             <Fragment Id="D0g0GQoJQ7NMPpGPP8DybR" Patch="GvU2HXvR3uEO1dvKFlZ2lB" Enabled="true" />
             <Fragment Id="LDCFnc1pMNlLKLla9xIAhH" Patch="PrszFUrwVvgO1RA1eYsm0a" Enabled="true" />
-            <Fragment Id="K9YJafEci2oOS1jKMyEVBM" Patch="P57N3gR3JOjMNRIIyf69vn" Enabled="true" />
             <Fragment Id="En4ziFpOzYpMHeZq3zF47y" Patch="UGQYisLKNoJOgfAIMGnLMV" Enabled="true" />
           </ProcessDefinition>
           <Link Id="InQOhuSNSPeN70naGRjGWS" Ids="SRcRMzApZMiOv20HGu0etK,RYfK7bSay07PDBN7NME3tf" />
           <Link Id="DfUCWOTUPbzPnclT8hyGx6" Ids="Cdux6xbRuOePqodUuXrcMD,H4OdgX9rMpPNlWRHICqYJX" />
           <Link Id="LyeQ9vTVY96Mdyg2pdmpu7" Ids="AZt6a4UzXcDLVrvV9hL1TK,Cdux6xbRuOePqodUuXrcMD" IsHidden="true" />
+          <Link Id="JLn3CgNQY0HOg2naSII4MK" Ids="SRcRMzApZMiOv20HGu0etK,VjiFXUn5V8JMo5p4xTXVLD" />
+          <Link Id="Tkqnrs12B9ZLVA2sarnSUB" Ids="MmRBswLudU2OGM1kzTZWxY,SG0iI56b002PXgq39KgpOc" />
+          <Link Id="QlVKW70UESdMqjBUKoTlwb" Ids="SG0iI56b002PXgq39KgpOc,Em18FL7b0gEOTE38fcSFQo" IsHidden="true" />
+          <Link Id="KIZvy60QVB0MIz0dX9qnzQ" Ids="SRcRMzApZMiOv20HGu0etK,KC1BSyaF6lzNNeUN3NxF8a" />
+          <Link Id="RC2APNM5rfDN83GqrT6kop" Ids="GQlHW9c0xYwQJW8hxXOQ7q,I5547tbd4ztQCFmONa3iHT" />
+          <Link Id="Iu4TL6gv1o3PyLtMmloCRI" Ids="I5547tbd4ztQCFmONa3iHT,FLD4SNDwBDANSoerFZQMiX" IsHidden="true" />
+          <Link Id="UUeodNmVS4dOYm1xniFjzs" Ids="SRcRMzApZMiOv20HGu0etK,PkWCLf5h0MoQbkZmQ1LA9I" />
+          <Link Id="EOn2Vt8lGMIO1Cyt52Dvja" Ids="GUbw1T4BRboLfIiFrnaKl6,G0TpxZrqkbyLRZyL7rG0cs" />
+          <Link Id="HFu6wWOujplNXUzJ2EnJPd" Ids="G0TpxZrqkbyLRZyL7rG0cs,Apm7y9CHVCuMpwNTUR5Ezo" IsHidden="true" />
+          <Link Id="SPsQWbCBRLfLGnQufz5eqq" Ids="FxcvNJy5uKsP2aduZA53BP,Ep1pOrPLB6COYyUzledDLC" />
+          <Link Id="VrqFPTHqZHwLSXm76HiUfk" Ids="CQhvajLbYB5PyfXwbwjBh9,SRcRMzApZMiOv20HGu0etK" />
         </Patch>
       </Node>
       <!--
@@ -246,6 +294,6 @@
     </Node>
   </Patch>
   <NugetDependency Id="HuTHS4jtyf9NewWADglJSj" Location="VL.Stride" Version="0.7.281-ga0dc4358a2" />
-  <PlatformDependency Id="IDX3fT6QxOdNzUVCsXb6AD" Location="./src/VL.Devices.DeckLink/bin/Debug/netstandard2.0/VL.Devices.DeckLink.dll" />
   <PlatformDependency Id="L8rwuNFuhpOOFO6Xt1F4Zw" Location="./src/VL.Devices.DeckLink/bin/Debug/netstandard2.0/Interop.DeckLinkAPI.dll" />
+  <PlatformDependency Id="Lo4L1TYT7ZLPiI9C3FRjTW" Location="./lib/netstandard2.0/VL.Devices.DeckLink.dll" />
 </Document>
