@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="BAnU6JWtqqeLZ9QOLbI4Ib" LanguageVersion="2020.2.0.236" Version="0.128">
-  <NugetDependency Id="T9VkosbiVDePuzSRd6qV6V" Location="VL.CoreLib" Version="2020.2.0-0236-g78f25d9fd2" />
+<Document xmlns:p="property" Id="BAnU6JWtqqeLZ9QOLbI4Ib" LanguageVersion="2020.2.0.284" Version="0.128">
+  <NugetDependency Id="T9VkosbiVDePuzSRd6qV6V" Location="VL.CoreLib" Version="2020.2.0-0284-g8a1fd67a19" />
   <Patch Id="GfsGbY95eAGMvjmI34vHU9">
     <Canvas Id="U3U9OBbG4pZPCEORoLS26J" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
     <!--
@@ -36,6 +36,8 @@
               </p:TypeAnnotation>
             </Pin>
             <Pin Id="QG3r4M6oHb8Lj9myRIlYjN" Name="Output" Kind="OutputPin" />
+            <Pin Id="CO9wLCZGqsYLKghsrjIbCl" Name="Display Mode" Kind="OutputPin" />
+            <Pin Id="BFSwGftr3iaNAFCbqvKGB3" Name="Pixel Format" Kind="OutputPin" />
             <Pin Id="AtN0vrwJEQ4MFhysawUiVh" Name="Colorspace" Kind="OutputPin" />
             <Pin Id="SjMx5JzLbafNGszkf5aT9y" Name="Discarded Frames" Kind="OutputPin" />
             <Pin Id="OFeP6yzoDjOLpIE3VSVCSl" Name="Supported Display Modes" Kind="OutputPin" />
@@ -45,7 +47,7 @@
               <Choice Kind="TypeFlag" Name="DeviceEnumEntry" />
             </p:TypeAnnotation>
           </Pad>
-          <Node Bounds="569,662,145,19" Id="CfnMesjwXJHLz9AHdzEjsR">
+          <Node Bounds="531,576,185,19" Id="CfnMesjwXJHLz9AHdzEjsR">
             <p:NodeReference LastCategoryFullName="Stride.Windowing" LastSymbolSource="VL.Stride.vl">
               <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
               <Choice Kind="ProcessAppFlag" Name="RenderWindow" />
@@ -55,17 +57,19 @@
                 <Choice Kind="TypeFlag" Name="Rectangle" />
               </p:TypeAnnotation>
             </Pin>
-            <Pin Id="SBGogLLdyMsPfGoAzTXXi6" Name="Input" Kind="InputPin" />
-            <Pin Id="F7Gbk2a3ZNQMYtutkiCg13" Name="Title" Kind="InputPin" />
-            <Pin Id="BjvkDdt2ia6Nth6i7lvp6o" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
-            <Pin Id="U8jPWf17SWRLegKk9SIbaM" Name="Render View" Kind="InputPin" />
-            <Pin Id="GFjq6EavwN7P2iHCay0VDv" Name="Enabled" Kind="InputPin" />
             <Pin Id="LyQifVYEcaLN9E7Otd8Xdp" Name="Back Buffer Format" Kind="InputPin">
               <p:TypeAnnotation LastCategoryFullName="Stride.API.Graphics" LastSymbolSource="VL.Stride.Graphics.vl">
                 <Choice Kind="TypeFlag" Name="PixelFormat" />
               </p:TypeAnnotation>
             </Pin>
             <Pin Id="NPEgsshnyJBQZGw7P8kUU8" Name="Depth Buffer Format" Kind="InputPin" />
+            <Pin Id="SBGogLLdyMsPfGoAzTXXi6" Name="Input" Kind="InputPin" />
+            <Pin Id="F7Gbk2a3ZNQMYtutkiCg13" Name="Title" Kind="InputPin" />
+            <Pin Id="BjvkDdt2ia6Nth6i7lvp6o" Name="Enable Keyboard Shortcuts" Kind="InputPin" />
+            <Pin Id="U8jPWf17SWRLegKk9SIbaM" Name="Render View" Kind="InputPin" />
+            <Pin Id="GFjq6EavwN7P2iHCay0VDv" Name="Enabled" Kind="InputPin" />
+            <Pin Id="KYuO9ylJY5UQXt9hOMcR5R" Name="EditMode" Kind="InputPin" />
+            <Pin Id="C6myPrS1o09Ma9mU2tbGDO" Name="Present Interval" Kind="InputPin" />
             <Pin Id="UvquERLkjeLL9hihLpSygW" Name="Output" Kind="OutputPin" />
             <Pin Id="Dq0ZwiXlshWP3hcIS0DOEK" Name="Input Source" Kind="OutputPin" />
             <Pin Id="BszxcqppBb1O3awdhT38S6" Name="Back Buffer" Kind="OutputPin" />
@@ -101,13 +105,8 @@
               </CategoryReference>
             </p:NodeReference>
             <Pin Id="L0FCysObiHIMZKo3RA0UIw" Name="Input" Kind="InputPin" />
-            <Pin Id="Di1owMUTXPbPt5BbudXIBS" Name="Clear Color" Kind="InputPin">
-              <p:TypeAnnotation LastCategoryFullName="Color" LastSymbolSource="CoreLibBasics.vl">
-                <Choice Kind="TypeFlag" Name="RGBA" />
-              </p:TypeAnnotation>
-            </Pin>
-            <Pin Id="O3HugYtW7mLM7YjJcl0dGp" Name="Clear" Kind="InputPin" />
-            <Pin Id="DjIqzDa7qKMLpY11HjBjLi" Name="Clear Depth" Kind="InputPin" />
+            <Pin Id="AHIDZnifv71Ly6OQJEWebC" Name="Color" Kind="InputPin" />
+            <Pin Id="JoS8IUtbZ3fL0mNgS7O6eh" Name="Enabled" Kind="InputPin" />
             <Pin Id="L0H2kygeXEnP3HknavEqFz" Name="Output" Kind="StateOutputPin" />
           </Node>
           <Node Bounds="480,426,25,19" Id="JrIN6a5t3vlMAR53Ew2TKA">
@@ -126,12 +125,12 @@
             </Pin>
             <Pin Id="Ick9TAKZ1JsMt7yZ6KJuYW" Name="Output" Kind="OutputPin" />
           </Node>
-          <Pad Id="IKXZe4VZYebMLtGs4DbXwa" Comment="Convert On GPU" Bounds="666,319,35,35" ShowValueBox="true" isIOBox="true" Value="True">
+          <Pad Id="IKXZe4VZYebMLtGs4DbXwa" Comment="Convert On GPU" Bounds="706,316,35,35" ShowValueBox="true" isIOBox="true" Value="True">
             <p:TypeAnnotation LastCategoryFullName="Primitive" LastSymbolSource="CoreLibBasics.vl">
               <Choice Kind="TypeFlag" Name="Boolean" />
             </p:TypeAnnotation>
           </Pad>
-          <Pad Id="E1edCvEo5Z6QBwrAIjWRAH" Bounds="674,357,141,19" ShowValueBox="true" isIOBox="true" Value="Assumes YUV422 8Bit">
+          <Pad Id="E1edCvEo5Z6QBwrAIjWRAH" Bounds="747,332,141,19" ShowValueBox="true" isIOBox="true" Value="Assumes YUV422 8Bit">
             <p:TypeAnnotation>
               <Choice Kind="TypeFlag" Name="String" />
             </p:TypeAnnotation>
@@ -156,6 +155,6 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="RDq5XSYXcAQPZe0ldqqluz" Location="VL.Stride" Version="0.7.281-ga0dc4358a2" />
+  <NugetDependency Id="RDq5XSYXcAQPZe0ldqqluz" Location="VL.Stride" Version="0.7.354-g0623c9ee29" />
   <DocumentDependency Id="Ine3tqQm6dCMf0rshe9RGN" Location="../VL.Devices.DeckLink.vl" />
 </Document>

@@ -11,6 +11,7 @@ using Stride.Shaders.Compiler;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -159,6 +160,10 @@ namespace VL.Devices.DeckLink
 
         public bool IsStreaming => currentDisplayMode != _BMDDisplayMode.bmdModeUnknown;
 
+        public _BMDDisplayMode CurrentDisplayMode => currentDisplayMode;
+
+        public _BMDPixelFormat CurrentPixelFormat => currentPixelFormat;
+
         public string SupportedDisplayModes { get; private set; }
 
         public int DiscardedFrames => discardedFrames;
@@ -166,6 +171,13 @@ namespace VL.Devices.DeckLink
         void UpdateSupportedDisplayFormats(IDeckLinkInput inputDevice)
         {
             var sb = new StringBuilder();
+            foreach (var deckLinkDisplayMode in GetSupportedDisplayFormats(inputDevice))
+                sb.AppendLine(deckLinkDisplayMode.GetDisplayMode().ToString());
+            SupportedDisplayModes = sb.ToString();
+        }
+
+        static IEnumerable<IDeckLinkDisplayMode> GetSupportedDisplayFormats(IDeckLinkInput inputDevice)
+        {
             if (inputDevice != null)
             {
                 inputDevice.GetDisplayModeIterator(out var iterator);
@@ -175,10 +187,20 @@ namespace VL.Devices.DeckLink
                     if (deckLinkDisplayMode is null)
                         break;
 
-                    sb.AppendLine(deckLinkDisplayMode.GetDisplayMode().ToString());
+                    yield return deckLinkDisplayMode;
                 }
             }
-            SupportedDisplayModes = sb.ToString();
+        }
+
+        static bool IsSupported(IDeckLinkInput inputDevice, _BMDDisplayMode displayMode, _BMDPixelFormat pixelFormat)
+        {
+            inputDevice.DoesSupportVideoMode(
+                _BMDVideoConnection.bmdVideoConnectionUnspecified,
+                displayMode,
+                pixelFormat,
+                _BMDSupportedVideoModeFlags.bmdSupportedVideoModeDefault,
+                out var supported);
+            return supported != 0;
         }
 
         void Resubscribe() => Resubscribe(preferredDisplayMode);
@@ -200,17 +222,25 @@ namespace VL.Devices.DeckLink
 
             try
             {
-                inputDevice.DoesSupportVideoMode(
-                    _BMDVideoConnection.bmdVideoConnectionUnspecified,
-                    requestedDisplayMode,
-                    requestedPixelFormat,
-                    _BMDSupportedVideoModeFlags.bmdSupportedVideoModeDefault,
-                    out var supported);
-
-                if (supported == 0)
+                var supported = IsSupported(inputDevice, requestedDisplayMode, requestedPixelFormat);
+                if (!supported)
                 {
-                    requestedDisplayMode = preferredDisplayMode;
-                    requestedPixelFormat = preferredPixelFormat;
+                    foreach (var decklinkDisplayMode in GetSupportedDisplayFormats(inputDevice))
+                    {
+                        if (IsSupported(inputDevice, decklinkDisplayMode.GetDisplayMode(), requestedPixelFormat))
+                        {
+                            supported = true;
+                            requestedDisplayMode = decklinkDisplayMode.GetDisplayMode();
+                            requestedPixelFormat = preferredPixelFormat;
+                            break;
+                        }
+                    }
+
+                    if (!supported)
+                    {
+                        currentDisplayMode = _BMDDisplayMode.bmdModeUnknown;
+                        return Disposable.Empty;
+                    }
                 }
 
                 inputDevice.EnableVideoInput(
@@ -282,6 +312,9 @@ namespace VL.Devices.DeckLink
 
             // Resubscribe with new display mode
             var displayMode = newDisplayMode.GetDisplayMode();
+            if (displayMode == currentDisplayMode)
+                return;
+
             if (synchronizationContext != null)
             {
                 synchronizationContext.Post(_ => Resubscribe(displayMode), default);
@@ -311,9 +344,9 @@ namespace VL.Devices.DeckLink
             if (currentPixelFormat == _BMDPixelFormat.bmdFormat8BitBGRA)
             {
                 // The frame is gamma corrected - mark texture as such (sRGB)
-                texture = ToTexture(Services, videoFrame, width, height, PixelFormat.B8G8R8A8_UNorm_SRgb);
+                texture = ToTexture(Services, videoFrame, width, height, PixelFormat.B8G8R8X8_UNorm_SRgb);
             }
-            if (doConvertOnGpu && currentPixelFormat == _BMDPixelFormat.bmdFormat8BitYUV)
+            else if (doConvertOnGpu && currentPixelFormat == _BMDPixelFormat.bmdFormat8BitYUV)
             {
                 texture = ToTexture(Services, videoFrame, width / 2, height, PixelFormat.B8G8R8A8_UNorm);
             }
