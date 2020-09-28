@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stride.Graphics" Version="4.0.0.1-vvvv-1273" />
-    <PackageReference Include="Stride.Rendering" Version="4.0.0.1-vvvv-1273" />
-    <PackageReference Include="Stride.Shaders.Compiler" Version="4.0.0.1-vvvv-1273" />
-    <PackageReference Include="VL.Core" Version="2020.2.0-0217-g78b13ed816" />
+    <PackageReference Include="Stride.Graphics" Version="4.0.0.1-beta04-1265" />
+    <PackageReference Include="Stride.Rendering" Version="4.0.0.1-beta04-1265" />
+    <PackageReference Include="Stride.Shaders.Compiler" Version="4.0.0.1-beta04-1265" />
+    <PackageReference Include="VL.Core" Version="2020.2.1" />
   </ItemGroup>
 
 </Project>

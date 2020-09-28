@@ -495,8 +495,7 @@ namespace VL.Devices.DeckLink
             isShaderInitialized = true;
 
             // Setup our own effect compiler
-            var databaseFileProvider = context.RenderContext.Services.GetService<IDatabaseFileProviderService>();
-            using var fileProvider = new InMemoryFileProvider(databaseFileProvider.FileProvider);
+            using var fileProvider = new InMemoryFileProvider(context.RenderContext.Effects.FileProvider);
             fileProvider.Register("shaders/YUV2RGB.sdsl", GetShaderSource());
             using var compiler = new EffectCompiler(fileProvider);
             compiler.SourceDirectories.Add("shaders");
