@@ -259,17 +259,6 @@ namespace VL.Devices.DeckLink
                     Colorspace = Colorspace.BT2020;
 
                 // Allocate video frame for conversion
-                var outputDevice = inputDevice as IDeckLinkOutput;
-                if (outputDevice != null)
-                {
-                    outputDevice.CreateVideoFrame(
-                        displayMode.GetWidth(),
-                        displayMode.GetHeight(),
-                        displayMode.GetWidth() * 4,
-                        _BMDPixelFormat.bmdFormat8BitBGRA,
-                        _BMDFrameFlags.bmdFrameFlagDefault, out var mutableConvertedFrame);
-                    convertedFrame = mutableConvertedFrame;
-                }
                 if (convertedFrame is null)
                     convertedFrame = new BGRAVideoOutputFrame(displayMode.GetWidth(), displayMode.GetHeight());
 
