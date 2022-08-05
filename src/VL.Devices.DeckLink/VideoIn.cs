@@ -549,7 +549,7 @@ shader YUV2RGB : ImageEffectShader
 {
     stage override float4 Shading()
     {
-	    uint pixel = streams.TexCoord.x / Texture0TexelSize.x;
+	    uint pixel = streams.TexCoord.x / (2 * Texture0TexelSize.x);
 	    bool rightPixel = pixel % 2 == 0;
 	
         float4 uyvy = Texture0.Sample(PointSampler, streams.TexCoord);
