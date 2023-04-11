@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "VL.Blackmagic.DeckLink.Core": {
+    "VL.Devices.DeckLink": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2020.2.0-0217-g78b13ed816\\vvvv.exe",
-      "commandLineArgs": "--package-repositories \"$(MsBuildThisFileDirectory)..\\..\\..\""
+      "executablePath": "C:\\Program Files\\vvvv\\vvvv_gamma_2021.4.12\\vvvv.exe",
+      "commandLineArgs": "--package-repositories \"$(MsBuildThisFileDirectory)..\\..\\..\" --editable-packages VL.Devices.DeckLink"
     }
   }
 }

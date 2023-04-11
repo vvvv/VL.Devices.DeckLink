@@ -128,6 +128,16 @@ namespace VL.Devices.DeckLink
         }
         bool applyDetectedDisplayMode;
 
+        /// <summary>
+        /// The time to wait in milliseconds until the next video frame arrives. Use -1 to wait indefinitely.
+        /// </summary>
+        public int WaitTime
+        {
+            get => waitTime;
+            set => waitTime = Math.Max(-1, value);
+        }
+        int waitTime;
+
         public Texture CurrentVideoFrame
         {
             get => currentVideoFrame;
@@ -421,14 +431,7 @@ namespace VL.Devices.DeckLink
             }
 
             // The buffer was empty, wait for the next video frame to arrive
-            inputDevice.GetDisplayMode(currentDisplayMode, out var displayMode);
-            displayMode.GetFrameRate(out var frameDuration, out var timeScale);
-            var fps = ((double)timeScale) / frameDuration;
-            var frameTime = 1d / fps;
-            var x = ((double)frameDuration) / timeScale;
-            //var waitTime = TimeSpan.FromTicks(frameDuration);
-            var waitTime = TimeSpan.FromSeconds(1);
-            if (videoFrameArrived.Wait(waitTime))
+            if (videoFrameArrived.Wait(WaitTime))
             {
                 // Reset the wait handle
                 videoFrameArrived.Reset();

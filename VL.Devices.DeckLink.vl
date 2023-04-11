@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document xmlns:p="property" Id="D7I3d8fdlaaQWfaNsXhtW3" LanguageVersion="2020.2.0.284" Version="0.128">
-  <NugetDependency Id="ND8hP97Ob5rQZ3KTmhwOkX" Location="VL.CoreLib" Version="2020.2.0-0284-g8a1fd67a19" />
+<Document xmlns:p="property" Id="D7I3d8fdlaaQWfaNsXhtW3" LanguageVersion="2021.4.12.1374" Version="0.128">
+  <NugetDependency Id="ND8hP97Ob5rQZ3KTmhwOkX" Location="VL.CoreLib" Version="2021.4.12" />
   <Patch Id="K9N4LTHiZdcOSCHK6hPcOD">
     <Canvas Id="Jnt0WY6eU44MLzzKTXeSuV" DefaultCategory="VL.Devices.DeckLink" CanvasType="FullCategory">
       <!--
@@ -55,7 +55,7 @@
               <Pin Id="CTkF5U973A2PO6faX836ad" Name="Output" Kind="StateOutputPin" />
             </Node>
             <ControlPoint Id="Nk4r5qgYnH5MFHdHuykm3F" Bounds="690,287" />
-            <ControlPoint Id="UihUV4Rvr89Pr87WOMhVuG" Bounds="841,290" />
+            <ControlPoint Id="UihUV4Rvr89Pr87WOMhVuG" Bounds="841,287" />
             <Node Bounds="452,498,101,19" Id="G39qSbbpjduMdOYGqMIPmt">
               <p:NodeReference LastCategoryFullName="Stride.Utils" LastSymbolSource="VL.Stride.Games.vl">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -74,7 +74,7 @@
               <Pin Id="KjcwT5Rmy5vQNXOBsHc2Sl" Name="Value" Kind="InputPin" />
               <Pin Id="A1zvZBAr5yEMzNrva4SJiw" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="GKuMo71rBPDO24PqzoJL2d" Bounds="997,289" />
+            <ControlPoint Id="GKuMo71rBPDO24PqzoJL2d" Bounds="997,287" />
             <Node Bounds="602,424,97,26" Id="UWO77lkrFwFNrGr2oLrj44">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -85,7 +85,7 @@
               <Pin Id="K1Wf7K3ExFDLUaRHHYUyof" Name="Output" Kind="StateOutputPin" />
               <Pin Id="I883anM7QEKLMjQ595WgPQ" Name="Result" Kind="OutputPin" />
             </Node>
-            <Node Bounds="1037,338,97,26" Id="Ew1mge3rT4aNjooUUGisWH">
+            <Node Bounds="1188,340,97,26" Id="Ew1mge3rT4aNjooUUGisWH">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
                 <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
@@ -95,7 +95,7 @@
               <Pin Id="H4OdgX9rMpPNlWRHICqYJX" Name="Value" Kind="InputPin" />
               <Pin Id="Jm4v7FMCoN0LRBVZK1i6AO" Name="Output" Kind="StateOutputPin" />
             </Node>
-            <ControlPoint Id="Cdux6xbRuOePqodUuXrcMD" Bounds="1132,287" />
+            <ControlPoint Id="Cdux6xbRuOePqodUuXrcMD" Bounds="1283,287" />
             <Node Bounds="1191,602,126,26" Id="P4ExpCEoQz1QYLDStd0gFF">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -117,7 +117,7 @@
               <Pin Id="BsWqV45bCiNPH1JXHmzUtD" Name="Output" Kind="StateOutputPin" />
               <Pin Id="GQlHW9c0xYwQJW8hxXOQ7q" Name="Discarded Frames" Kind="OutputPin" />
             </Node>
-            <ControlPoint Id="I5547tbd4ztQCFmONa3iHT" Bounds="1183,714" />
+            <ControlPoint Id="I5547tbd4ztQCFmONa3iHT" Bounds="1183,712" />
             <Node Bounds="977,602,97,26" Id="S2Stmd2L3IMMe1wzFblPtT">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -128,7 +128,7 @@
               <Pin Id="UAfqgZmEGhXNyyOvU14f2E" Name="Output" Kind="StateOutputPin" />
               <Pin Id="GUbw1T4BRboLfIiFrnaKl6" Name="Colorspace" Kind="OutputPin" />
             </Node>
-            <ControlPoint Id="G0TpxZrqkbyLRZyL7rG0cs" Bounds="1070,719" />
+            <ControlPoint Id="G0TpxZrqkbyLRZyL7rG0cs" Bounds="1070,712" />
             <Node Bounds="444,218,154,26" Id="JwBdO7namnAM9De7GZHF3y">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -162,7 +162,7 @@
               <Pin Id="Jo9EyrnBvtWOlIiC2GQOcy" Name="Output" Kind="StateOutputPin" />
               <Pin Id="AVBLefHdSWLPT8oEhFhXfR" Name="Current Display Mode" Kind="OutputPin" />
             </Node>
-            <ControlPoint Id="HPqBerCsKoPLMJ5qVhP6XQ" Bounds="848,722" />
+            <ControlPoint Id="HPqBerCsKoPLMJ5qVhP6XQ" Bounds="848,712" />
             <Node Bounds="860,602,109,26" Id="GjW8bEtMmlOMk8Kkiwne3O">
               <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
                 <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
@@ -173,31 +173,20 @@
               <Pin Id="HXls5ten1AnPp7tFiskcUl" Name="Output" Kind="StateOutputPin" />
               <Pin Id="LahUZZZUBNGMciYWFZHHY3" Name="Current Pixel Format" Kind="OutputPin" />
             </Node>
-            <ControlPoint Id="R78mpShViuyOJoHic2LZru" Bounds="963,717" />
+            <ControlPoint Id="R78mpShViuyOJoHic2LZru" Bounds="963,712" />
+            <Node Bounds="1052,342,97,26" Id="HoQxYP0xyZgPDyjRR960tL">
+              <p:NodeReference LastCategoryFullName="VL.Devices.DeckLink.VideoCaptureRenderer" LastSymbolSource="VL.Devices.DeckLink.dll">
+                <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+                <CategoryReference Kind="AssemblyCategory" Name="VideoCaptureRenderer" />
+                <Choice Kind="OperationCallFlag" Name="SetWaitTime" />
+              </p:NodeReference>
+              <Pin Id="NZ3IWueyX5NPmumE3BW0zO" Name="Input" Kind="StateInputPin" />
+              <Pin Id="FGl399Dt5jFNbErimihp9d" Name="Value" Kind="InputPin" />
+              <Pin Id="NQYr3vsoahFMe6tdF4r6fU" Name="Output" Kind="StateOutputPin" />
+            </Node>
+            <ControlPoint Id="I8PjNBqXxQjMjcbgjiGqbu" Bounds="1145,287" />
           </Canvas>
-          <Patch Id="VEmoPsqo25CObgUprdfF7R" Name="Create" ParticipatingElements="JsT7j1YkqKsLpoikwFcdk8" />
-          <Patch Id="UGQYisLKNoJOgfAIMGnLMV" Name="Update">
-            <Pin Id="AhGCSUArxcNOJNQXaX4wqQ" Name="Output" Kind="OutputPin" Bounds="697,512" />
-            <Pin Id="AZt6a4UzXcDLVrvV9hL1TK" Name="Convert On GPU" Kind="InputPin" Bounds="515,342" />
-            <Pin Id="Em18FL7b0gEOTE38fcSFQo" Name="Supported Display Modes" Kind="OutputPin" Bounds="986,548" />
-            <Pin Id="FLD4SNDwBDANSoerFZQMiX" Name="Discarded Frames" Kind="OutputPin" Bounds="918,654" />
-            <Pin Id="Apm7y9CHVCuMpwNTUR5Ezo" Name="Colorspace" Kind="OutputPin" Bounds="810,747" />
-            <Pin Id="Gceea00OlP7NAJKvnRmjov" Name="Device" Kind="InputPin" />
-            <Pin Id="UyRMKcqZs4qP5piXnoKqhu" Name="Preferred Display Mode" Kind="InputPin" DefaultValue="bmdModeHD1080p6000">
-              <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
-                <Choice Kind="TypeFlag" Name="_BMDDisplayMode" />
-              </p:TypeAnnotation>
-            </Pin>
-            <Pin Id="Edfd7HOeCgyQV6yARtQoCX" Name="Preferred Pixel Format" Kind="InputPin" DefaultValue="bmdFormat8BitYUV">
-              <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
-                <Choice Kind="TypeFlag" Name="_BMDPixelFormat" />
-              </p:TypeAnnotation>
-            </Pin>
-            <Pin Id="FofjQn1VHxLLptshHhB4HB" Name="Display Mode" Kind="OutputPin" Bounds="905,683" />
-            <Pin Id="D5V95RmiNIxMxzC4FudsMM" Name="Pixel Format" Kind="OutputPin" Bounds="1041,682" />
-          </Patch>
           <Slot Id="IpdbLEAKMwALDAkxorlC0Y" Name="Instance" />
-          <Patch Id="PAGUpajLF3LNnACHfpGCt8" Name="Dispose" ParticipatingElements="OitcLggWChtOnRUQbXIMfB" />
           <Link Id="ONtuGa8yYi6LEcyKXTpzYP" Ids="PGknvAVLifDP1BJVbpwPJm,FXUlCqYDxmhOLF2MIZW1pD" />
           <Link Id="LOJrBJvkmA4MdaLpYU9X4k" Ids="SRcRMzApZMiOv20HGu0etK,ChrtaknqhI4PCWIFPtPEif" />
           <Link Id="GALTIYFUqrKMuVqohk1sf5" Ids="Nk4r5qgYnH5MFHdHuykm3F,Lizb7lqBqu8MhWe3QdJwVW" />
@@ -224,8 +213,6 @@
           <Link Id="VrqFPTHqZHwLSXm76HiUfk" Ids="CQhvajLbYB5PyfXwbwjBh9,SRcRMzApZMiOv20HGu0etK" />
           <Link Id="RTN8s9ggDs3PsoYR7ibqhW" Ids="JokkPUi2yYDPsseJZvKLck,KaJbTlFobZhN9gI7hEc2Zd" />
           <Link Id="EhyikaKgoBNOWvOYHn7YWv" Ids="CTkF5U973A2PO6faX836ad,HRB5Kh75e5yPVV7iNsxYjy" />
-          <Link Id="P6lqEqK6AwXNzr9VwWltry" Ids="A1zvZBAr5yEMzNrva4SJiw,RYfK7bSay07PDBN7NME3tf" />
-          <Link Id="QbxzyzH3lq2QMQ8ojB3odi" Ids="Jm4v7FMCoN0LRBVZK1i6AO,N6eJFPdTQQPLHUp1tajV1P" />
           <Link Id="BKp3UzQ4bzbNDPGRLdJKA1" Ids="K1Wf7K3ExFDLUaRHHYUyof,NGIuxY0Ob9ILkNqMn2cwSd" />
           <Link Id="FRfhN6qZI5JM3m7SIwJImB" Ids="K1Wf7K3ExFDLUaRHHYUyof,PkWCLf5h0MoQbkZmQ1LA9I" />
           <Link Id="VrMiEiG6t64MoTlG85Fsgl" Ids="AVBLefHdSWLPT8oEhFhXfR,HPqBerCsKoPLMJ5qVhP6XQ" />
@@ -236,6 +223,34 @@
           <Link Id="Qo5hFNkeVraOIw7zkEYZxs" Ids="K1Wf7K3ExFDLUaRHHYUyof,MAy8KleuwRhQJWUxxwqWhu" />
           <Link Id="VeGKYJb0Mt6Moq6aTnV9TG" Ids="K1Wf7K3ExFDLUaRHHYUyof,KC1BSyaF6lzNNeUN3NxF8a" />
           <Link Id="JJip7XG0LIMMl5ynROMf9s" Ids="K1Wf7K3ExFDLUaRHHYUyof,VjiFXUn5V8JMo5p4xTXVLD" />
+          <Link Id="P8SkfI7PCFPOG7awKO51jE" Ids="I8PjNBqXxQjMjcbgjiGqbu,FGl399Dt5jFNbErimihp9d" />
+          <Link Id="F2kNRrkQ42tOM1Krd1AyuH" Ids="IA2UQn1upbUPOH3VjF0Ulu,I8PjNBqXxQjMjcbgjiGqbu" IsHidden="true" />
+          <Patch Id="VEmoPsqo25CObgUprdfF7R" Name="Create" ParticipatingElements="JsT7j1YkqKsLpoikwFcdk8" />
+          <Patch Id="UGQYisLKNoJOgfAIMGnLMV" Name="Update">
+            <Pin Id="Gceea00OlP7NAJKvnRmjov" Name="Device" Kind="InputPin" />
+            <Pin Id="UyRMKcqZs4qP5piXnoKqhu" Name="Preferred Display Mode" Kind="InputPin" DefaultValue="bmdModeHD1080p6000">
+              <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
+                <Choice Kind="TypeFlag" Name="_BMDDisplayMode" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="Edfd7HOeCgyQV6yARtQoCX" Name="Preferred Pixel Format" Kind="InputPin" DefaultValue="bmdFormat8BitYUV">
+              <p:TypeAnnotation LastCategoryFullName="VL.Devices.DeckLink" LastSymbolSource="VL.Devices.DeckLink.vl">
+                <Choice Kind="TypeFlag" Name="_BMDPixelFormat" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="IA2UQn1upbUPOH3VjF0Ulu" Name="Wait Time" Kind="InputPin" Bounds="1261,284" />
+            <Pin Id="AZt6a4UzXcDLVrvV9hL1TK" Name="Convert On GPU" Kind="InputPin" Bounds="515,342" />
+            <Pin Id="AhGCSUArxcNOJNQXaX4wqQ" Name="Output" Kind="OutputPin" Bounds="697,512" />
+            <Pin Id="FofjQn1VHxLLptshHhB4HB" Name="Display Mode" Kind="OutputPin" Bounds="905,683" />
+            <Pin Id="D5V95RmiNIxMxzC4FudsMM" Name="Pixel Format" Kind="OutputPin" Bounds="1041,682" />
+            <Pin Id="Apm7y9CHVCuMpwNTUR5Ezo" Name="Colorspace" Kind="OutputPin" Bounds="810,747" />
+            <Pin Id="FLD4SNDwBDANSoerFZQMiX" Name="Discarded Frames" Kind="OutputPin" Bounds="918,654" />
+            <Pin Id="Em18FL7b0gEOTE38fcSFQo" Name="Supported Display Modes" Kind="OutputPin" Bounds="986,548" />
+          </Patch>
+          <Patch Id="PAGUpajLF3LNnACHfpGCt8" Name="Dispose" ParticipatingElements="OitcLggWChtOnRUQbXIMfB" />
+          <Link Id="ISTCEFTrJclPUfEJNFniPx" Ids="A1zvZBAr5yEMzNrva4SJiw,NZ3IWueyX5NPmumE3BW0zO" />
+          <Link Id="A9qhgYehniTNTugPMESuqn" Ids="NQYr3vsoahFMe6tdF4r6fU,RYfK7bSay07PDBN7NME3tf" />
+          <Link Id="UqPh4SsRhRsMwe9z8U60N5" Ids="Jm4v7FMCoN0LRBVZK1i6AO,N6eJFPdTQQPLHUp1tajV1P" />
         </Patch>
       </Node>
       <!--
@@ -314,7 +329,7 @@
       </Patch>
     </Node>
   </Patch>
-  <NugetDependency Id="HuTHS4jtyf9NewWADglJSj" Location="VL.Stride" Version="0.7.354-g0623c9ee29" />
+  <NugetDependency Id="HuTHS4jtyf9NewWADglJSj" Location="VL.Stride" Version="2021.4.12" />
   <PlatformDependency Id="L8rwuNFuhpOOFO6Xt1F4Zw" Location="./src/VL.Devices.DeckLink/bin/Debug/netstandard2.0/Interop.DeckLinkAPI.dll" />
   <PlatformDependency Id="Lo4L1TYT7ZLPiI9C3FRjTW" Location="./lib/netstandard2.0/VL.Devices.DeckLink.dll" />
 </Document>
