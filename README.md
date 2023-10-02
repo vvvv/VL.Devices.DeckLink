@@ -1,5 +1,5 @@
 # VL.Devices.DeckLink
-Set of nodes to use the [DeckLink](https://www.blackmagicdesign.com/products/decklink) cards by [Blackmagic Design](https://www.blackmagicdesign.com) in VL.
+A package for using [DeckLink](https://www.blackmagicdesign.com/products/decklink) capture cards by [Blackmagic Design](https://www.blackmagicdesign.com) in VL.
 
 Try it with vvvv, the visual live-programming environment for .NET  
 Download: http://visualprogramming.net
