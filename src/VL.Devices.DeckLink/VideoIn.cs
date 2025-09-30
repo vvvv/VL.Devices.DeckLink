@@ -39,25 +39,41 @@ namespace VL.Devices.DeckLink
                 if (value?.Value != deviceName)
                 {
                     deviceName = value?.Value;
-
-                    var iterator = new CDeckLinkIterator();
                     var inputDevice = default(IDeckLinkInput);
-                    while (true)
-                    {
-                        iterator.Next(out var deckLink);
-                        if (deckLink is null)
-                            break;
 
-                        if (deckLink is IDeckLinkInput deckLinkInput)
+                    try
+                    {
+                        var iterator = new CDeckLinkIterator();
+                        if (iterator != null)
                         {
-                            deckLink.GetModelName(out var modelName);
-                            deckLink.GetDisplayName(out var displayName);
-                            if (displayName == deviceName)
+                            while (true)
                             {
-                                inputDevice = deckLinkInput;
-                                break;
+                                iterator.Next(out var deckLink);
+                                if (deckLink is null)
+                                    break;
+
+                                if (deckLink is IDeckLinkInput deckLinkInput)
+                                {
+                                    deckLink.GetModelName(out var modelName);
+                                    deckLink.GetDisplayName(out var displayName);
+                                    if (displayName == deviceName)
+                                    {
+                                        inputDevice = deckLinkInput;
+                                        break;
+                                    }
+                                }
                             }
                         }
+                    }
+                    // DeckLink COM-Class not registered (REGDB_E_CLASSNOTREG).
+                    catch (COMException ex) when ((uint)ex.ErrorCode == 0x80040154)
+                    {
+
+                    }
+                    // all other
+                    catch (Exception ex)
+                    {
+
                     }
 
                     InputDevice = inputDevice;
@@ -473,7 +489,14 @@ namespace VL.Devices.DeckLink
             }
 
             var shader = this.shader ?? (this.shader = CreateShader(context));
-            shader.SetInput(CurrentVideoFrame);
+
+            // Set the Output Texture as Input0 (right Width e.g 1920)
+            // and CurrentVideoFrame  as Input1 (wrong Width e.g 960)
+            // With this trick the Shader will be invoked with right Width (e.g 1920)
+            // That was the easiest way I found to run TextureFX with the correct width
+            // and not half the width, which in turn led to the sawtooth edges.
+
+            shader.SetInput( current.outputTexture, CurrentVideoFrame);
             shader.SetOutput(current.outputTexture);
             shader.Draw(context);
         }
@@ -498,7 +521,14 @@ namespace VL.Devices.DeckLink
             try
             {
                 var shader = new ImageEffectShader("YUV2RGB");
-                shader.SetInput(CurrentVideoFrame);
+
+                // Set the Output Texture as Input0 (right Width e.g 1920)
+                // and CurrentVideoFrame  as Input1 (wrong Width e.g 960)
+                // With this trick the Shader will be invoked with right Width (e.g 1920)
+                // That was the easiest way I found to run TextureFX with the correct width
+                // and not half the width, which in turn led to the sawtooth edges.
+
+                shader.SetInput(current.outputTexture, CurrentVideoFrame);
                 shader.SetOutput(current.outputTexture);
                 shader.Draw(context);
                 return shader;
@@ -552,10 +582,12 @@ shader YUV2RGB : ImageEffectShader
 {
     stage override float4 Shading()
     {
-	    uint pixel = streams.TexCoord.x / (2 * Texture0TexelSize.x);
+        // use Width (e.g. 1920) from Texture0 ... assigned to outputTexture
+	    uint pixel = streams.TexCoord.x / (Texture0TexelSize.x);
 	    bool rightPixel = pixel % 2 == 0;
 	
-        float4 uyvy = Texture0.Sample(PointSampler, streams.TexCoord);
+        // use Texture1 width half width as input 
+        float4 uyvy = Texture1.Sample(PointSampler, streams.TexCoord);
 	    float y1 = uyvy.a;
 	    float y2 = uyvy.g;
 	    float u = uyvy.b;
