@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>VL.Devices.DeckLink</id>
-    <version>0.0.6-pre</version>
+    <version>0.0.7-pre</version>
     <title>VL.Devices.DeckLink</title>
     <authors>vvvv</authors>
     <owners>vvvv</owners>
