@@ -39,25 +39,41 @@ namespace VL.Devices.DeckLink
                 if (value?.Value != deviceName)
                 {
                     deviceName = value?.Value;
-
-                    var iterator = new CDeckLinkIterator();
                     var inputDevice = default(IDeckLinkInput);
-                    while (true)
-                    {
-                        iterator.Next(out var deckLink);
-                        if (deckLink is null)
-                            break;
 
-                        if (deckLink is IDeckLinkInput deckLinkInput)
+                    try
+                    {
+                        var iterator = new CDeckLinkIterator();
+                        if (iterator != null)
                         {
-                            deckLink.GetModelName(out var modelName);
-                            deckLink.GetDisplayName(out var displayName);
-                            if (displayName == deviceName)
+                            while (true)
                             {
-                                inputDevice = deckLinkInput;
-                                break;
+                                iterator.Next(out var deckLink);
+                                if (deckLink is null)
+                                    break;
+
+                                if (deckLink is IDeckLinkInput deckLinkInput)
+                                {
+                                    deckLink.GetModelName(out var modelName);
+                                    deckLink.GetDisplayName(out var displayName);
+                                    if (displayName == deviceName)
+                                    {
+                                        inputDevice = deckLinkInput;
+                                        break;
+                                    }
+                                }
                             }
                         }
+                    }
+                    // DeckLink COM-Class not registered (REGDB_E_CLASSNOTREG).
+                    catch (COMException ex) when ((uint)ex.ErrorCode == 0x80040154)
+                    {
+
+                    }
+                    // all other
+                    catch (Exception ex)
+                    {
+
                     }
 
                     InputDevice = inputDevice;
