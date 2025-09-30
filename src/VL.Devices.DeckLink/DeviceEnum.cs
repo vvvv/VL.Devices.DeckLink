@@ -1,8 +1,10 @@
 ﻿using DeckLinkAPI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using VL.Lib;
 using VL.Lib.Collections;
@@ -19,20 +21,42 @@ namespace VL.Devices.DeckLink
         {
             var devices = new Dictionary<string, object>();
 
-            var iterator = new CDeckLinkIterator();
-            var deviceList = new List<IDeckLink>();
-            while (true)
+            try
             {
-                iterator.Next(out var deckLink);
-                if (deckLink is null)
-                    break;
+                var iterator = new CDeckLinkIterator();
 
-                if (deckLink is IDeckLinkInput deckLinkInput)
+                if (iterator != null)
                 {
-                    deckLink.GetModelName(out var modelName);
-                    deckLink.GetDisplayName(out var displayName);
-                    devices.Add(displayName, deckLinkInput);
+                    var deviceList = new List<IDeckLink>();
+                    while (true)
+                    {
+                        iterator.Next(out var deckLink);
+                        if (deckLink is null)
+                            break;
+
+                        if (deckLink is IDeckLinkInput deckLinkInput)
+                        {
+                            deckLink.GetModelName(out var modelName);
+                            deckLink.GetDisplayName(out var displayName);
+                            devices.Add(displayName, deckLinkInput);
+                        }
+                    }
                 }
+            }
+            // DeckLink COM-Class not registered (REGDB_E_CLASSNOTREG).
+            catch (COMException ex) when ((uint)ex.ErrorCode == 0x80040154)
+            {
+                
+            }
+            // native dll not found
+            catch (DllNotFoundException ex)
+            {
+               
+            }
+            // Interop load problem
+            catch (TypeLoadException ex)
+            {
+
             }
 
             // Add a default entry which makes it up to the system to select a device
